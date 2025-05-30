@@ -1,0 +1,29 @@
+@startuml
+actor User
+participant "API Gateway" as AG
+participant "Inference Service" as IS
+participant "Database" as DB
+participant "Message Broker" as MB
+participant "Moderation UI" as UI
+participant Moderator
+
+User -> AG: POST /classify { comment }
+AG -> IS: forward classify request
+
+IS -> DB: INSERT Comment(status = "pending")
+IS -> IS: preprocess(text)
+IS -> IS: classify with ML model
+IS -> DB: UPDATE Comment SET label, score
+
+IS --> AG: HTTP 200 { label, score }
+
+alt label == "negative"
+  IS -> MB: publish FlaggedComment { commentId, label, score }
+  MB -> UI: deliver FlaggedComment event
+  UI -> Moderator: display flagged comment
+  Moderator -> UI: choose action(approve/delete)
+  UI -> DB: UPDATE Comment SET status = "approved"/"deleted"
+else label != "negative"
+  note over AG, DB: No flagging for neutral/positive
+end
+@enduml
