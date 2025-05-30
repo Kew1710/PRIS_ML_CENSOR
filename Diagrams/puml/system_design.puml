@@ -1,0 +1,40 @@
+@startuml
+package "Frontend/CMS" {
+  [User Interface]
+}
+
+package "Gateway API" {
+  [API Gateway]
+}
+
+package "Модели очередей" {
+  [Kafka]
+}
+
+package "ML Service" {
+  [TextCleaner]
+  [Classifier]
+}
+
+package "Модерация" {
+  [Flag Queue]
+  [Moderator Panel]
+}
+
+package "Хранилища данных" {
+  [MongoDB] as mongo
+  [S3 Storage] as s3
+  [PostgreSQL] as pg
+}
+
+[User Interface] --> [API Gateway] : "Комментарии\n(JSON)"
+[API Gateway] --> [Kafka] : "Сырые данные"
+[Kafka] --> [TextCleaner] : "Текст"
+[TextCleaner] --> [Classifier] : "Очищенный текст"
+[Classifier] --> [Flag Queue] : "Подозрительные\nкомментарии"
+[Classifier] --> mongo : "Метаданные\nанализа"
+[Flag Queue] --> [Moderator Panel] : "Задачи модерации"
+[Moderator Panel] --> pg : "Решения\nмодераторов"
+pg --> [API Gateway] : "Статусы\nмодерации"
+[API Gateway] --> [User Interface] : "Обновления"
+@enduml

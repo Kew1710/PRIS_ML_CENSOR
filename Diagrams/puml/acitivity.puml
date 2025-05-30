@@ -1,0 +1,19 @@
+@startuml
+start
+:Receive new comment;
+:Preprocess text;
+:Classify sentiment;
+if (label == negative?) then (yes)
+  :Publish flagged comment to queue;
+  :Display in moderator UI;
+  :Wait for moderator action;
+  if (action == approve) then (approve)
+    :Publish comment;
+  else (delete)
+    :Remove comment;
+  endif
+else (no)
+  :Publish comment;
+endif
+stop
+@enduml

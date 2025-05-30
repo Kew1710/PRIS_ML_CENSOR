@@ -1,0 +1,61 @@
+@startuml
+entity Users {
+  * user_id : UUID
+  --
+  username : VARCHAR(64)
+  email : VARCHAR(128)
+  password_hash : TEXT
+  registered_at : TIMESTAMP
+  is_active : BOOLEAN
+  is_moderator : BOOLEAN
+}
+
+entity Posts {
+  * post_id : UUID
+  --
+  author_id : UUID
+  title : VARCHAR(255)
+  content : TEXT
+  published_at : TIMESTAMP
+  is_deleted : BOOLEAN
+}
+
+entity Comments {
+  * comment_id : UUID
+  --
+  post_id : UUID
+  user_id : UUID
+  text : TEXT
+  created_at : TIMESTAMP
+  is_edited : BOOLEAN
+  is_deleted : BOOLEAN
+}
+
+entity ClassificationResults {
+  * result_id : UUID
+  --
+  comment_id : UUID
+  model_version : VARCHAR(32)
+  label : VARCHAR(64)
+  score : FLOAT
+  flagged : BOOLEAN
+  processed_at : TIMESTAMP
+}
+
+entity ModerationLogs {
+  * log_id : UUID
+  --
+  comment_id : UUID
+  moderator_id : UUID
+  action : VARCHAR(32) // "approve", "reject", "ban"
+  reason : TEXT
+  action_taken_at : TIMESTAMP
+}
+
+Users ||--o{ Posts : authors
+Users ||--o{ Comments : writes
+Posts ||--o{ Comments : receives
+Comments ||--o{ ClassificationResults : has
+Comments ||--o{ ModerationLogs : moderated
+Users ||--o{ ModerationLogs : performs
+@enduml
