@@ -71,5 +71,5 @@
 
 [Следующий этап](Ml_system_design/2_Methodology.md)
 
-[Главная страница](master.md)
+[Главная страница](../README.md)
 
