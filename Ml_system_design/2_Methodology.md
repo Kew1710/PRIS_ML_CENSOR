@@ -37,6 +37,6 @@
 
 [Следующий этап](Ml_system_design/3_Pilot_Preparation.md)
 
-[Главная страница](README.md)
+[Главная страница](../README.md)
 
 
