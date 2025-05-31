@@ -2,8 +2,8 @@
 
 **Команда:**  
 - Григорьев Алексей — Product Owner  
-- B — Data Architect & Software Architect  
-- C — Data Engineer & Data Scientist  
+- Скирляк Ярослав — Data Architect & Software Architect  
+- Таипов Тимур — Data Engineer & Data Scientist  
 
 ## Ссылки
 - ML-документ:
