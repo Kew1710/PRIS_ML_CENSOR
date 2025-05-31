@@ -16,5 +16,7 @@
     - [Диаграма базы данных](Diagrams/png/database.png)
     - [Последовательная диаграма](Diagrams/png/sequence.png)
     - [Архитектурная диаграма](Diagrams/png/system_design.png)
-
+- Модели:
+    - [Автоматизированная модерация](Models/png/idef0_after.png)
+    - [Мануальная модерация](Models/png/idef0_before.png)
 ---
