@@ -12,6 +12,9 @@
   - [Подготовка](Ml_system_design/3_Pilot_Preparation.md)
   - [Деплой](Ml_system_design/4_Production_Deployment.md)
 - Диаграммы:
-    - ![Диаграма активности](Diagrams/png/activity.png)
+    - [Диаграма активности](Diagrams/png/activity.png)
+    - [Диаграма базы данных](Diagrams/png/database.png)
+    - [Последовательная диаграма](Diagrams/png/sequence.png)
+    - [Архитектурная диаграма](Diagrams/png/system_design.png)
 
 ---
